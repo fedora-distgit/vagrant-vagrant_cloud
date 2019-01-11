@@ -12,7 +12,7 @@ Requires: vagrant
 BuildRequires: vagrant
 BuildRequires: rubygem(rdoc)
 BuildRequires: rubygem(rspec)
-#BuildRequires: rubygems-devel
+BuildRequires: rubygems-devel
 BuildArch: noarch
 Provides: vagrant(%{vagrant_plugin_name}) = %{version}
 
