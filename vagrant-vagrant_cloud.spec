@@ -1,7 +1,7 @@
 # Generated from vagrant_cloud-2.0.1.gem by gem2rpm -*- rpm-spec -*-
-%global vagrant_plugin_name vagrant-vagrant_cloud
+%global vagrant_plugin_name vagrant_cloud
 
-Name: %{vagrant_plugin_name}
+Name: vagrant-%{vagrant_plugin_name}
 Version: 2.0.1
 Release: 1%{?dist}
 Summary: Vagrant Cloud API Library
@@ -12,7 +12,7 @@ Requires: vagrant
 BuildRequires: vagrant
 BuildRequires: rubygem(rdoc)
 BuildRequires: rubygem(rspec)
-BuildRequires: rubygems-devel
+#BuildRequires: rubygems-devel
 BuildArch: noarch
 Provides: vagrant(%{vagrant_plugin_name}) = %{version}
 
