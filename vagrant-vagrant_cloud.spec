@@ -42,7 +42,7 @@ cp -a .%{vagrant_plugin_dir}/* \
 
 
 %check
-pushd .%{gem_instdir}
+pushd .%{vagrant_plugin_instdir}
 rspec spec
 popd
 
