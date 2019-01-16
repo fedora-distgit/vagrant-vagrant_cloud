@@ -8,11 +8,10 @@ Summary: Vagrant Cloud API Library
 License: MIT
 URL: https://github.com/hashicorp/vagrant_cloud
 Source0: %{vagrant_plugin_name}-%{version}.gem
-# upstream gem doesn't ship tests, pull in from upstream
-# git clone https://github.com/hashicorp/vagrant_cloud.git
-# cd vagrant_cloud && git checkout v2.0.2
-# tar czvf vagrant_cloud-2.0.2-spec.tgz spec
-Source1: %{vagrant_plugin_name}-%{version}-spec.tgz
+# Upstream gem doesn't ship tests, pull it from upstream
+# git clone --no-checkout https://github.com/hashicorp/vagrant_cloud.git
+# git -C vagrant_cloud archive -v -o vagrant_cloud-2.0.2-spec.txz v2.0.2 spec
+Source1: %{vagrant_plugin_name}-%{version}-spec.txz
 Requires: vagrant
 BuildRequires: vagrant
 BuildRequires: rubygem(rdoc)
@@ -34,7 +33,7 @@ BuildArch: noarch
 Documentation for %{name}.
 
 %prep
-%setup -q -n %{vagrant_plugin_name}-%{version}
+%setup -q -n %{vagrant_plugin_name}-%{version} -b1
 
 %build
 gem build ../%{vagrant_plugin_name}-%{version}.gemspec
@@ -47,7 +46,7 @@ cp -a .%{vagrant_plugin_dir}/* \
 
 %check
 pushd .%{vagrant_plugin_instdir}
-tar xaf %{SOURCE1}
+ln -s %{_builddir}/spec .
 
 sed -i "/^\s*it 'creates a one off box given params' do$/ a skip" \
   spec/vagrant_cloud/box_spec.rb
