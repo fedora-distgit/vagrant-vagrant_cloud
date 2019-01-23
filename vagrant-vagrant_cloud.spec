@@ -2,16 +2,22 @@
 %global vagrant_plugin_name vagrant_cloud
 
 Name: vagrant-%{vagrant_plugin_name}
-Version: 2.0.1
+Version: 2.0.2
 Release: 1%{?dist}
 Summary: Vagrant Cloud API Library
 License: MIT
 URL: https://github.com/hashicorp/vagrant_cloud
 Source0: %{vagrant_plugin_name}-%{version}.gem
+# upstream gem doesn't ship tests, pull in from upstream
+# git clone https://github.com/hashicorp/vagrant_cloud.git
+# cd vagrant_cloud && git checkout v2.0.2
+# tar czvf vagrant_cloud-2.0.2-spec.tgz spec
+Source1: %{vagrant_plugin_name}-%{version}-spec.tgz
 Requires: vagrant
 BuildRequires: vagrant
 BuildRequires: rubygem(rdoc)
 BuildRequires: rubygem(rspec)
+BuildRequires: rubygem(webmock)
 BuildArch: noarch
 Provides: vagrant(%{vagrant_plugin_name}) = %{version}
 
@@ -42,6 +48,7 @@ cp -a .%{vagrant_plugin_dir}/* \
 
 %check
 pushd .%{vagrant_plugin_instdir}
+tar xaf %{SOURCE1}
 rspec spec
 popd
 
@@ -58,5 +65,5 @@ popd
 %doc %{vagrant_plugin_instdir}/README.md
 
 %changelog
-* Tue Dec 04 2018 pvalena <pvalena@redhat.com> - 2.0.1-1
+* Tue Dec 04 2018 Pavel Valena <pvalena@redhat.com> - 2.0.2-1
 - Initial package
