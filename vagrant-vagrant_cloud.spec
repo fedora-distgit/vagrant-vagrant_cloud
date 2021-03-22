@@ -48,6 +48,8 @@ cp -a .%{vagrant_plugin_dir}/* \
 pushd .%{vagrant_plugin_instdir}
 ln -s %{_builddir}/spec .
 
+# Disable test that requires updated WebMock
+# https://src.fedoraproject.org/rpms/rubygem-webmock/pull-request/1
 sed -i "/^\s*it 'creates a one off box given params' do$/ a skip" \
   spec/vagrant_cloud/box_spec.rb
 
