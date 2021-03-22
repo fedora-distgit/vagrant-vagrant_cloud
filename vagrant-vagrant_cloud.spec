@@ -2,7 +2,7 @@
 %global vagrant_plugin_name vagrant_cloud
 
 Name: vagrant-%{vagrant_plugin_name}
-Version: 2.0.2
+Version: 3.0.4
 Release: 1%{?dist}
 Summary: Vagrant Cloud API Library
 License: MIT
@@ -10,7 +10,7 @@ URL: https://github.com/hashicorp/vagrant_cloud
 Source0: %{vagrant_plugin_name}-%{version}.gem
 # Upstream gem doesn't ship tests, pull it from upstream
 # git clone --no-checkout https://github.com/hashicorp/vagrant_cloud.git
-# git -C vagrant_cloud archive -v -o vagrant_cloud-2.0.2-spec.txz v2.0.2 spec
+# git -C vagrant_cloud archive -v -o vagrant_cloud-3.0.4-spec.txz v3.0.4 spec
 Source1: %{vagrant_plugin_name}-%{version}-spec.txz
 Requires: vagrant
 BuildRequires: vagrant
@@ -69,5 +69,5 @@ popd
 %doc %{vagrant_plugin_instdir}/README.md
 
 %changelog
-* Tue Dec 04 2018 Pavel Valena <pvalena@redhat.com> - 2.0.2-1
+* Mon Mar 22 2021 Pavel Valena <pvalena@redhat.com> - 3.0.4-2
 - Initial package
