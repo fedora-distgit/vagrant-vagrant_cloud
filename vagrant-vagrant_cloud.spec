@@ -17,6 +17,7 @@ BuildRequires: vagrant
 BuildRequires: rubygem(rdoc)
 BuildRequires: rubygem(rspec)
 BuildRequires: rubygem(webmock)
+BuildRequires: rubygem(excon)
 BuildArch: noarch
 Provides: vagrant(%{vagrant_plugin_name}) = %{version}
 
@@ -47,11 +48,6 @@ cp -a .%{vagrant_plugin_dir}/* \
 %check
 pushd .%{vagrant_plugin_instdir}
 ln -s %{_builddir}/spec .
-
-# Disable test that requires updated WebMock
-# https://src.fedoraproject.org/rpms/rubygem-webmock/pull-request/1
-sed -i "/^\s*it 'creates a one off box given params' do$/ a skip" \
-  spec/vagrant_cloud/box_spec.rb
 
 rspec spec
 popd
